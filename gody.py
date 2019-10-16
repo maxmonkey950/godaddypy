@@ -2,11 +2,11 @@
 from godaddypy import Client, Account
 import time
 ##company
-api_key = 'dLDQ3np5twWq_63xCRCmEDBLUjSiKuQAYmQ'
-api_secret = 'DifHeMdaUAQ2gsZnEBGLKP'
+api_key = 'xxx'
+api_secret = 'xxx'
 ##personal
-#api_key = 'e4XjnMnKPF5b_KrovPZUUhZb15fxNqH37UP'
-#api_secret = 'SKQue82erEzshQwD9dwZ2P'
+#api_key = 'xxx'
+#api_secret = 'xxx'
 my_acct = Account(api_key, api_secret)
 delegate_acct = Account(api_key, api_secret, delegate='DELEGATE_ID')
 client = Client(my_acct)

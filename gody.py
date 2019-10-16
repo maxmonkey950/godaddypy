@@ -2,17 +2,18 @@
 from godaddypy import Client, Account
 import time
 ##company
-api_key = 'xxx'
-api_secret = 'xxx'
+api_key = 'dLDQ3np5twWq_63xCRCmEDBLUjSiKuQAYmQ'
+api_secret = 'DifHeMdaUAQ2gsZnEBGLKP'
 ##personal
-#api_key = 'xxx'
-#api_secret = 'xxx'
+#api_key = 'e4XjnMnKPF5b_KrovPZUUhZb15fxNqH37UP'
+#api_secret = 'SKQue82erEzshQwD9dwZ2P'
 my_acct = Account(api_key, api_secret)
 delegate_acct = Account(api_key, api_secret, delegate='DELEGATE_ID')
 client = Client(my_acct)
 delegate_client = Client(delegate_acct)
 
 def adddns(asd):
+    print("update %s!" % asd)
     try:
         t = client.get_domain_info(asd)
     except:
@@ -21,19 +22,28 @@ def adddns(asd):
         p = ['IVY.NS.CLOUDFLARE.COM', 'JAY.NS.CLOUDFLARE.COM']
         if t.get('nameServers') == p:
             client.update_domain(asd, nameServers = ['ns23.domaincontrol.com', 'ns24.domaincontrol.com'])
-            print("%s default ns has changed!" % asd)
-            time.sleep(10)
+            print("%s ns has changed, plase wait to effective." % asd)
+            time.sleep(3)
+            j = 0
+            while True:
+                v = client.get_domain_info(asd)
+                if v.get('nameServers') == p:
+                    time.sleep(3)
+                    j += 3
+                    print('wait... %s s' % j)
+                else:
+                    print("%s default ns has changed!" % asd)
+                    break
         try:
             client.delete_records(asd, name='www', record_type='CNAME')
 #           time.sleep(3)
         except:
             i = 0
             while True:
-                print('while step!')
                 k = client.get_records(asd, record_type='CNAME', name='www')
                 if k:
-                    time.sleep(1)
-                    i += 1
+                    time.sleep(3)
+                    i += 3
                     print('wait... %s s' % i)
                 else:
                     break
@@ -93,4 +103,4 @@ if __name__ == '__main__':
     for line in open("code"):
         line = line.strip('\n')
         adddns(line)
-        print ("%s has changed!" % line)
+        print ("%s has changed, Next one!" % line)

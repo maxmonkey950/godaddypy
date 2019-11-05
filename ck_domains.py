@@ -7,11 +7,11 @@ cur=conn.cursor()
 cur.execute("TRUNCATE TABLE public.dns")
 logging.basicConfig(filename="ckdomains.log", filemode="w", format="%(asctime)s %(name)s:%(levelname)s:%(message)s", datefmt="%d-%M-%Y %H:%M:%S", level=logging.DEBUG)
 ##company
-api_key = 'dLDQ3np5twWq_63xCRCmEDBLUjSiKuQAYmQ'
-api_secret = 'DifHeMdaUAQ2gsZnEBGLKP'
+api_key = 'xxx'
+api_secret = 'xxx'
 ##personal
-#api_key = 'e4XjnMnKPF5b_KrovPZUUhZb15fxNqH37UP'
-#api_secret = 'SKQue82erEzshQwD9dwZ2P'
+#api_key = 'xxx'
+#api_secret = 'xxx'
 my_acct = Account(api_key, api_secret)
 delegate_acct = Account(api_key, api_secret, delegate='DELEGATE_ID')
 client = Client(my_acct)

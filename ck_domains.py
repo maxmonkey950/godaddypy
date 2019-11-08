@@ -2,7 +2,7 @@
 #coding=utf-8
 from godaddypy import Client, Account
 import time, logging, psycopg2
-conn=psycopg2.connect(database="cmdb",user="postgres",password="7758521",host="47.244.219.176",port="5432")
+conn=psycopg2.connect(database="cmdb",user="postgres",password="xxxx",host="xxxx",port="5432")
 cur=conn.cursor()
 cur.execute("TRUNCATE TABLE public.dns")
 logging.basicConfig(filename="ckdomains.log", filemode="w", format="%(asctime)s %(name)s:%(levelname)s:%(message)s", datefmt="%d-%M-%Y %H:%M:%S", level=logging.DEBUG)

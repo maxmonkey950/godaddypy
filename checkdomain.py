@@ -1,13 +1,13 @@
 from godaddypy import Client, Account
 import time, logging, psycopg2, requests, sys
 
-conn = psycopg2.connect(database="cmdb", user="postgres", password="7758521", host="47.244.219.176", port="5432")
+conn = psycopg2.connect(database="xxx", user="postgres", password="xxx", host="xxx", port="5432")
 cur = conn.cursor()
 
 headers = {
     'accept': 'application/json',
-    # 'Authorization': 'sso-key dLDQ3np5twWq_63xCRCmEDBLUjSiKuQAYmQ:DifHeMdaUAQ2gsZnEBGLKP',
-    'Authorization': 'sso-key 9EBujmEjZLC_iUHzJ59GFGL4SGmgon4ww:U66cPR94NsNhxGezmGR18X',
+    # 'Authorization': 'sso-key xxx:xxx',
+    'Authorization': 'sso-key xxx:xxx',
 }
 
 params = [

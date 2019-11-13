@@ -50,7 +50,7 @@ if __name__ == '__main__':
         ak = ck_domains(line)
         print(line, ak[0], ak[1])
 #        cur.execute("INSERT INTO public.siteinfo(Code,Description,Status,jump)VALUES(%s,%s,%s,%s)",(line,ak,'A','none'))
-        cur.execute("INSERT INTO public.dns VALUES (5067421, 'dns', %s, %s, 'A', 'admin', '2019-10-30 13:38:57.464686', NULL, 'None', %s)",(line,ak[0],ak[1]))
+        cur.execute("INSERT INTO public.dns VALUES (5067421, 'dns', 'None', 'None', 'A', 'admin', '2019-10-30 13:38:57.464686', NULL, 'None', %s, %s, %s)",(ak[1],ak[0],line))
         conn.commit()
     cur.close()
     conn.close()

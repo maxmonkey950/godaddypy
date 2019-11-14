@@ -1,15 +1,25 @@
 from godaddypy import Client, Account
 from configparser import ConfigParser
 import time, logging, psycopg2, requests, sys
+<<<<<<< HEAD
 cfg = ConfigParser()
 cfg.read('config.ini')
 config = dict(cfg.items('tuoguan'))
 conn = psycopg2.connect(database=config['dbname'], user=config['dbuser'], password=config['dbpass'], host=config['dbhost'], port=config['dbport'])
+=======
+
+conn = psycopg2.connect(database="xxx", user="postgres", password="xxx", host="xxx", port="5432")
+>>>>>>> 15dfccdfb02fa0171ce3b7743622445508559a9d
 cur = conn.cursor()
 
 headers = {
     'accept': 'application/json',
+<<<<<<< HEAD
     'Authorization': config['ce'],
+=======
+    # 'Authorization': 'sso-key xxx:xxx',
+    'Authorization': 'sso-key xxx:xxx',
+>>>>>>> 15dfccdfb02fa0171ce3b7743622445508559a9d
 }
 
 params = [

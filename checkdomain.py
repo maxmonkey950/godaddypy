@@ -68,7 +68,6 @@ def update_db():
 
 def insert_update():
     conn = psycopg2.connect(database=config['dbname'], user=config['dbuser'], password=config['dbpass'], host=config['dbhost'], port=config['dbport'])
-    ###conn = psycopg2.connect(database="cmdb", user="postgres", password="7758521", host="47.244.219.176", port="5432")
     cur = conn.cursor()
     cur.execute("select domains, dnsstatus from public.dns where \"Status\" = 'A'")
     old_data = cur.fetchall()
@@ -98,13 +97,11 @@ def insert_update():
             cur.close()
             conn.close()
             conn = psycopg2.connect(database=config['dbname'], user=config['dbuser'], password=config['dbpass'], host=config['dbhost'], port=config['dbport'])
-            ###conn = psycopg2.connect(database="cmdb", user="postgres", password="7758521", host="47.244.219.176", port="5432")
             cur = conn.cursor()
 
 def init_data():
     # TRUNCATE TABLE
     conn = psycopg2.connect(database=config['dbname'], user=config['dbuser'], password=config['dbpass'], host=config['dbhost'], port=config['dbport'])
-    ###conn = psycopg2.connect(database="cmdb", user="postgres", password="7758521", host="47.244.219.176", port="5432")
     cur = conn.cursor()
     global total_datas
     for k, v in total_datas.items():
@@ -119,7 +116,6 @@ def init_data():
             cur.close()
             conn.close()
             conn = psycopg2.connect(database=config['dbname'], user=config['dbuser'], password=config['dbpass'], host=config['dbhost'], port=config['dbport'])
-            ###conn = psycopg2.connect(database="cmdb", user="postgres", password="7758521", host="47.244.219.176", port="5432")
             cur = conn.cursor()
 
 if __name__ == '__main__':

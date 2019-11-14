@@ -1,25 +1,15 @@
 from godaddypy import Client, Account
 from configparser import ConfigParser
 import time, logging, psycopg2, requests, sys
-<<<<<<< HEAD
 cfg = ConfigParser()
 cfg.read('config.ini')
 config = dict(cfg.items('tuoguan'))
 conn = psycopg2.connect(database=config['dbname'], user=config['dbuser'], password=config['dbpass'], host=config['dbhost'], port=config['dbport'])
-=======
-
-conn = psycopg2.connect(database="xxx", user="postgres", password="xxx", host="xxx", port="5432")
->>>>>>> 15dfccdfb02fa0171ce3b7743622445508559a9d
 cur = conn.cursor()
 
 headers = {
     'accept': 'application/json',
-<<<<<<< HEAD
     'Authorization': config['ce'],
-=======
-    # 'Authorization': 'sso-key xxx:xxx',
-    'Authorization': 'sso-key xxx:xxx',
->>>>>>> 15dfccdfb02fa0171ce3b7743622445508559a9d
 }
 
 params = [
@@ -80,7 +70,7 @@ def insert_update():
     conn = psycopg2.connect(database=config['dbname'], user=config['dbuser'], password=config['dbpass'], host=config['dbhost'], port=config['dbport'])
     ###conn = psycopg2.connect(database="cmdb", user="postgres", password="7758521", host="47.244.219.176", port="5432")
     cur = conn.cursor()
-    cur.execute("select domains, dnsstatus from public.dns where \"Status\" = 'A'")
+	    cur.execute("select domains, dnsstatus from public.dns where \"Status\" = 'A'")
     old_data = cur.fetchall()
     #global total_datas
     need_insert_data = []
@@ -145,4 +135,3 @@ if __name__ == '__main__':
         update_db()
     cur.close()
     conn.close()
-

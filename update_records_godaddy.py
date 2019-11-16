@@ -1,15 +1,16 @@
 #!/usr/bin/env python
+## auther honux, update the dns records of godaddy, you must keep the redis running and config.ini exist. 
 from godaddypy import Client, Account
 import time, logging, redis
-pool = redis.ConnectionPool(host='127.0.0.1',port=6379,decode_responses=True)
+from configparser import ConfigParser
+cfg = ConfigParser()
+cfg.read('config.ini')
+config = dict(cfg.items('update_records_godaddy'))
+pool = redis.ConnectionPool(host='172.21.4.118',port=6379,decode_responses=True)
 r = redis.Redis(connection_pool=pool)
 logging.basicConfig(filename="godaddy.log", filemode="w", format="%(asctime)s %(name)s:%(levelname)s:%(message)s", datefmt="%d-%M-%Y %H:%M:%S", level=logging.DEBUG)
-##company
-api_key = 'xxx'
-api_secret = 'xxx'
-##personal
-#api_key = 'xxx'
-#api_secret = 'xxx'
+api_key = config['vu_key']
+api_secret = config['vu_secret']
 my_acct = Account(api_key, api_secret)
 delegate_acct = Account(api_key, api_secret, delegate='DELEGATE_ID')
 client = Client(my_acct)

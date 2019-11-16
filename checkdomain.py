@@ -1,3 +1,4 @@
+##auther honux, check the domains from godaddy and insert them to postgres db.
 from godaddypy import Client, Account
 from configparser import ConfigParser
 import time, logging, psycopg2, requests, sys

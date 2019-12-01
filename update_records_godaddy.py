@@ -46,6 +46,7 @@ def adddns(asd):
             while True:
                 k = client.get_records(asd, record_type='CNAME', name='www')
                 if k:
+                    client.delete_records(asd, name='www', record_type='CNAME')
                     time.sleep(3)
                     i += 3
                     logging.info('waiting... %s s' % i)

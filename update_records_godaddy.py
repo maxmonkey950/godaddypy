@@ -6,7 +6,7 @@ from configparser import ConfigParser
 cfg = ConfigParser()
 cfg.read('config.ini')
 config = dict(cfg.items('update_records_godaddy'))
-pool = redis.ConnectionPool(host='172.21.4.118',port=6379,decode_responses=True)
+pool = redis.ConnectionPool(host='127.0.0.1',port=6379,decode_responses=True)
 r = redis.Redis(connection_pool=pool)
 logging.basicConfig(filename="godaddy.log", filemode="w", format="%(asctime)s %(name)s:%(levelname)s:%(message)s", datefmt="%d-%M-%Y %H:%M:%S", level=logging.DEBUG)
 api_key = config['vu_key']
@@ -48,18 +48,12 @@ def adddns(asd):
                 if k:
                     time.sleep(3)
                     i += 3
-                    logging.info('wait... %s s' % i)
+                    logging.info('waiting... %s s' % i)
                 else:
                     break
             logging.info("%s has deleted www record! by except!" % asd)
         else:
             logging.info("%s has deleted www record! by step1!" % asd)
-        try:
-            client.add_record(asd, {'data':'shops.myshopify.com','name':'www','ttl':600, 'type':'CNAME'})
-        except Exception as e:
-            logging.error("%s www changed has ERR" % asd)
-        else:
-            pass
         try:
             client.add_record(asd, {'data':'23.227.38.32','name':'letter','ttl':600, 'type':'A'})
         except Exception as e:
@@ -88,6 +82,12 @@ def adddns(asd):
             client.add_record(asd, {'data':'v=spf1 include:spf.mandrillapp.com ?all','name':'@','ttl':600, 'type':'TXT'})
         except Exception as e:
             logging.error("%s self type TXT changed has ERR" % asd)
+        else:
+            pass
+        try:
+            client.add_record(asd, {'data':'shops.myshopify.com','name':'www','ttl':600, 'type':'CNAME'})
+        except Exception as e:
+            logging.error("%s www changed has ERR" % asd)
         else:
             pass
         try:

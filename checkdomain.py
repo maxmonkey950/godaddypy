@@ -10,7 +10,7 @@ cur = conn.cursor()
 
 headers = {
     'accept': 'application/json',
-    'Authorization': config['ce'],
+    'Authorization': config['vu'],
 }
 
 params = [

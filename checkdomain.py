@@ -10,7 +10,7 @@ cur = conn.cursor()
 
 headers = {
     'accept': 'application/json',
-    'Authorization': config['vu'],
+    'Authorization': config[sys.argv[2]],
 }
 
 params = [
@@ -121,13 +121,13 @@ def init_data():
 
 if __name__ == '__main__':
     get_domains()
-    if len(sys.argv) == 2 and sys.argv[1] == 'init':
+    if len(sys.argv) == 3 and sys.argv[1] == 'init':
         print("init data")
         init_data()
-    elif len(sys.argv) == 2 and sys.argv[1] == 'insert':
+    elif len(sys.argv) == 3 and sys.argv[1] == 'insert':
         print("insert data")
         insert_update()
-    elif len(sys.argv) == 2 and sys.argv[1] == 'update':
+    elif len(sys.argv) == 3 and sys.argv[1] == 'update':
         print("update")
         update_db()
     cur.close()

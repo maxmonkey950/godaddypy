@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-## auther honux, update the dns records of godaddy, you must keep the redis running and config.ini exist. 
+## auther honux, update the dns records of godaddy, you must keep the redis running and config.ini exist.
 from godaddypy import Client, Account
 import time, logging, redis
 from configparser import ConfigParser
@@ -44,14 +44,41 @@ def adddns(asd):
         except Exception as e:
             i = 0
             while True:
-                k = client.get_records(asd, record_type='CNAME', name='www')
-                if k:
-                    client.delete_records(asd, name='www', record_type='CNAME')
+                print('buho1')
+                try:
+                    k = client.get_records(asd, record_type='CNAME', name='www')
+                except Exception as e:
                     time.sleep(3)
-                    i += 3
-                    logging.info('waiting... %s s' % i)
+                    try:
+                        k = client.get_records(asd, record_type='CNAME', name='www')
+                    except Exception as e:
+                        time.sleep(5)
+                        print('buho2')
+                        k = client.get_records(asd, record_type='CNAME', name='www')
+                    if k:
+                        try:
+                            client.delete_records(asd, name='www', record_type='CNAME')
+                        except Exception as e:
+                            r.lpush("godaddy_err", asd)
+                            print(asd)
+                            break
+                        time.sleep(3)
+                        i += 3
+                        logging.info('waiting... %s s' % i)
+                    else:
+                        break
                 else:
-                    break
+                    if k:
+                        try:
+                            client.delete_records(asd, name='www', record_type='CNAME')
+                        except Exception as e:
+                            time.sleep(3)
+                            client.delete_records(asd, name='www', record_type='CNAME')
+                        time.sleep(3)
+                        i += 3
+                        logging.info('waiting... %s s' % i)
+                    else:
+                        break
             logging.info("%s has deleted www record! by except!" % asd)
         else:
             logging.info("%s has deleted www record! by step1!" % asd)
